@@ -231,12 +231,12 @@ def Free_summer_giveaway():
 
         if Free_summer_giveaway_userInput == "electric bike":
             while True:
-                fries_Upgrade = input("Do you want to get a birthday card instead(yes or no): ")
-                if fries_Upgrade == "reset":
+                Free_summer_giveaway_userInput_Upgrade = input("Do you want to get a birthday card instead(yes or no): ")
+                if Free_summer_giveaway_userInput_Upgrade == "reset":
                     print("\nYou have reset your order.")
                     Reset()
                 try:
-                    if fries_Upgrade == "yes":
+                    if Free_summer_giveaway_userInput_Upgrade == "yes":
                         order.append("Birthday card")
                         while True:
                             try:
@@ -253,7 +253,7 @@ def Free_summer_giveaway():
                             except ValueError:
                                 print("Please input an integer.")
                         break
-                    elif fries_Upgrade == "no":
+                    elif Free_summer_giveaway_userInput_Upgrade == "no":
                         order.append(Free_summer_giveaway_userInput)
                         while True:
                             try:
@@ -311,7 +311,7 @@ def Free_summer_giveaway():
                     print("Please input an integer.")
     elif Free_summer_giveaway_option == "no":
         order_Options.append(Free_summer_giveaway_option)
-        order.append("no")
+        order.append("no options")
         Free_summer_giveaway_amount = ""
         print("")
     else:
@@ -330,13 +330,13 @@ Free_summer_giveaway()
     
 print("")
 print("")
-if (iceCream_option == "yes") and (Free_summer_giveaway_option == "yes") and (Toppings_option == "yes"):
-    total_price.append(-1.00)
-    print("You got a discount of $1 off the entire meal.")
+
 
 print("Your total is: " + "{:.2f}".format(sum(total_price))) ### Found on cheatography.com for f strings
 
 
 print("You have ordered: " + str(iceCream_amount) + " " + order[0] + " ice cream scoops, " +  str(Toppings_amount) + " " + order[1] + " servings" + ", and " + str(Free_summer_giveaway_amount) + " " + order[2] + " out of the free gifts")
+
+
 
 
