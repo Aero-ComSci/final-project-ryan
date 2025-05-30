@@ -6,8 +6,6 @@ toppings_menu = ["sprinkles", "gummies", "bolts"]
 freesummergiveaway_menu = ["electric bike", "GeForce RTX 5090", "Birthday card"]
 
 
-
-
 def Reset():
     global total_price, order, order_Options, icecream_menu, freesummergiveaway_menu, toppings_menu
     total_price = []
@@ -19,22 +17,17 @@ def Reset():
     iceCream()
     Toppings()
     Free_summer_giveaway()
-    
-
 
 
 def iceCream():
-    global iceCream_userInput
-    global iceCream_amount
-    global iceCream_option
+    global iceCream_userInput, iceCream_amount, iceCream_option
     iceCream_option = input("Do you want ice cream (yes or no):")
     if iceCream_option == "reset":
         print("\nYou have reset your order.")
         Reset()
     if iceCream_option == "yes":
         order_Options.append(iceCream_option)
-        print("")
-        print("Which ice cream flavour do you want: ")
+        print("\nWhich ice cream flavour do you want: ")
         for each in icecream_menu:
             print(each)
         iceCream_userInput = input("Type here: ")
@@ -43,17 +36,16 @@ def iceCream():
             Reset()
 
         while iceCream_userInput not in icecream_menu:
-            print("")
+            print("\nThat is not an option. Choose from above")
             for each in icecream_menu:
                 print(each)
-            print("That is not an option. Choose from above")
             iceCream_userInput = input("Type here: ")
             if iceCream_userInput == "reset":
                 print("\nYou have reset your order.")
                 Reset()
 
         if iceCream_userInput == "vanilla":
-            order.append(iceCream_userInput)
+            order.append("vanilla")
             while True:
                 try:
                     iceCream_amount = input("How many vanilla ice cream scoops do you want: ")
@@ -69,7 +61,7 @@ def iceCream():
                 except ValueError:
                     print("Please input an integer.")
         elif iceCream_userInput == "choclate":
-            order.append(iceCream_userInput)
+            order.append("choclate")
             while True:
                 try:
                     iceCream_amount = input("How many choclate ice cream scoops do you want: ")
@@ -85,7 +77,7 @@ def iceCream():
                 except ValueError:
                     print("Please input an integer.")
         elif iceCream_userInput == "oil":
-            order.append(iceCream_userInput)
+            order.append("oil")
             while True:
                 try:
                     iceCream_amount = input("How many oil ice cream scoops do you want: ")
@@ -101,28 +93,24 @@ def iceCream():
                 except ValueError:
                     print("Please input an integer.")
     elif iceCream_option == "no":
-        order_Options.append(iceCream_option)
+        order_Options.append("no")
         order.append("no")
         iceCream_amount = ""
-        print("")
+        print()
     else:
-        print("")
-        print("That is not an option")
+        print("\nThat is not an option")
         iceCream()
 
 
 def Toppings():
-    global Toppings_userInput
-    global Toppings_amount
-    global Toppings_option
-    Toppings_option = input("Do you want a toppings(yes or no):")
+    global Toppings_userInput, Toppings_amount, Toppings_option
+    Toppings_option = input("Do you want toppings (yes or no):")
     if Toppings_option == "reset":
         print("\nYou have reset your order.")
         Reset()
     if Toppings_option == "yes":
-        order_Options.append(Toppings_option)
-        print("")
-        print("Which topping do you want: ")
+        order_Options.append("yes")
+        print("\nWhich topping do you want: ")
         for each in toppings_menu:
             print(each)
         Toppings_userInput = input("Type here: ")
@@ -131,20 +119,35 @@ def Toppings():
             Reset()
 
         while Toppings_userInput not in toppings_menu:
-            print("")
+            print("\nThat is not an option. Choose from above")
             for each in toppings_menu:
                 print(each)
-            print("That is not an option. Choose from above")
             Toppings_userInput = input("Type here: ")
             if Toppings_userInput == "reset":
                 print("\nYou have reset your order.")
                 Reset()
 
         if Toppings_userInput == "sprinkles":
-            order.append(Toppings_userInput)
+            order.append("sprinkles")
             while True:
                 try:
                     Toppings_amount = input("How many servings of sprinkles do you want: ")
+                    if Toppings_amount == "reset":
+                        print("\nYou have reset your order.")
+                        Reset()
+                    Toppings_amount = int(Toppings_amount)
+                    if Toppings_amount > 0:
+                        total_price.append(0.50 * Toppings_amount)
+                        break
+                    else:
+                        print("Please input a positive integer.")
+                except ValueError:
+                    print("Please input an integer.")
+        elif Toppings_userInput == "gummies":
+            order.append("gummies")
+            while True:
+                try:
+                    Toppings_amount = input("How many servings of gummies do you want: ")
                     if Toppings_amount == "reset":
                         print("\nYou have reset your order.")
                         Reset()
@@ -156,24 +159,8 @@ def Toppings():
                         print("Please input a positive integer.")
                 except ValueError:
                     print("Please input an integer.")
-        elif Toppings_userInput == "gummies":
-            order.append(Toppings_userInput)
-            while True:
-                try:
-                    Toppings_amount = input("How many servings of gummies do you want: ")
-                    if Toppings_amount == "reset":
-                        print("\nYou have reset your order.")
-                        Reset()
-                    Toppings_amount = int(Toppings_amount)
-                    if Toppings_amount > 0:
-                        total_price.append(1.75 * Toppings_amount)
-                        break
-                    else:
-                        print("Please input a positive integer.")
-                except ValueError:
-                    print("Please input an integer.")
         elif Toppings_userInput == "bolts":
-            order.append(Toppings_userInput)
+            order.append("bolts")
             while True:
                 try:
                     Toppings_amount = input("How many servings of bolts do you want: ")
@@ -182,36 +169,31 @@ def Toppings():
                         Reset()
                     Toppings_amount = int(Toppings_amount)
                     if Toppings_amount > 0:
-                        total_price.append(2.25 * Toppings_amount)
+                        total_price.append(5.00 * Toppings_amount)
                         break
                     else:
                         print("Please input a positive integer.")
                 except ValueError:
                     print("Please input an integer.")
     elif Toppings_option == "no":
-        order_Options.append(Toppings_option)
+        order_Options.append("no")
         order.append("no")
         Toppings_amount = ""
-        print("")
+        print()
     else:
-        print("")
-        print("That is not an option")
+        print("\nThat is not an option")
         Toppings()
 
 
-
 def Free_summer_giveaway():
-    global Free_summer_giveaway_userInput
-    global Free_summer_giveaway_amount
-    global Free_summer_giveaway_option
+    global Free_summer_giveaway_userInput, Free_summer_giveaway_amount, Free_summer_giveaway_option
     Free_summer_giveaway_option = input("Do you want a free summer gift (yes or no):")
     if Free_summer_giveaway_option == "reset":
         print("\nYou have reset your order.")
         Reset()
     if Free_summer_giveaway_option == "yes":
-        order_Options.append(Free_summer_giveaway_option)
-        print("")
-        print("Which summer gift do you want for free: ")
+        order_Options.append("yes")
+        print("\nWhich summer gift do you want for free: ")
         for each in freesummergiveaway_menu:
             print(each)
         Free_summer_giveaway_userInput = input("Type here: ")
@@ -220,10 +202,9 @@ def Free_summer_giveaway():
             Reset()
 
         while Free_summer_giveaway_userInput not in freesummergiveaway_menu:
-            print("")
+            print("\nThat is not an option. Choose from above")
             for each in freesummergiveaway_menu:
                 print(each)
-            print("That is not an option. Choose from above")
             Free_summer_giveaway_userInput = input("Type here: ")
             if Free_summer_giveaway_userInput == "reset":
                 print("\nYou have reset your order.")
@@ -231,70 +212,64 @@ def Free_summer_giveaway():
 
         if Free_summer_giveaway_userInput == "electric bike":
             while True:
-                Free_summer_giveaway_userInput_Upgrade = input("Do you want to get a birthday card instead(yes or no): ")
+                Free_summer_giveaway_userInput_Upgrade = input("Do you want to get a birthday card instead (yes or no): ")
                 if Free_summer_giveaway_userInput_Upgrade == "reset":
                     print("\nYou have reset your order.")
                     Reset()
-                try:
-                    if Free_summer_giveaway_userInput_Upgrade == "yes":
-                        order.append("Birthday card")
-                        while True:
-                            try:
-                                Free_summer_giveaway_amount = input("How many birthday cards do you want: ")
-                                if Free_summer_giveaway_amount == "reset":
-                                    print("\nYou have reset your order.")
-                                    Reset()
-                                Free_summer_giveaway_amount = int(Free_summer_giveaway_amount)
-                                if Free_summer_giveaway_amount > 0:
-                                    total_price.append(1.00 * Free_summer_giveaway_amount)
-                                    break
-                                else:
-                                    print("Please input a positive integer.")
-                            except ValueError:
-                                print("Please input an integer.")
-                        break
-                    elif Free_summer_giveaway_userInput_Upgrade == "no":
-                        order.append(Free_summer_giveaway_userInput)
-                        while True:
-                            try:
-                                Free_summer_giveaway_amount = input("How many electric bikes do you want: ")
-                                if Free_summer_giveaway_amount == "reset":
-                                    print("\nYou have reset your order.")
-                                    Reset()
-                                Free_summer_giveaway_amount = int(Free_summer_giveaway_amount)
-                                if Free_summer_giveaway_amount > 0:
-                                    total_price.append(1.00 * Free_summer_giveaway_amount)
-                                    break
-                                else:
-                                    print("Please input a positive integer.")
-                            except ValueError:
-                                print("Please input an integer.")
-                        break
-                    else:
-                        print("")
-                        print("Please input a valid option:")
-                
-                except ValueError:
-                    print("Invalid input.")
+                if Free_summer_giveaway_userInput_Upgrade == "yes":
+                    order.append("Birthday card")
+                    while True:
+                        try:
+                            Free_summer_giveaway_amount = input("How many birthday cards do you want: ")
+                            if Free_summer_giveaway_amount == "reset":
+                                print("\nYou have reset your order.")
+                                Reset()
+                            Free_summer_giveaway_amount = int(Free_summer_giveaway_amount)
+                            if Free_summer_giveaway_amount > 0:
+                                total_price.append(0.00 * Free_summer_giveaway_amount)
+                                break
+                            else:
+                                print("Please input a positive integer.")
+                        except ValueError:
+                            print("Please input an integer.")
+                    break
+                elif Free_summer_giveaway_userInput_Upgrade == "no":
+                    order.append("electric bike")
+                    while True:
+                        try:
+                            Free_summer_giveaway_amount = input("How many electric bikes do you want: ")
+                            if Free_summer_giveaway_amount == "reset":
+                                print("\nYou have reset your order.")
+                                Reset()
+                            Free_summer_giveaway_amount = int(Free_summer_giveaway_amount)
+                            if Free_summer_giveaway_amount > 0:
+                                total_price.append(0.00 * Free_summer_giveaway_amount)
+                                break
+                            else:
+                                print("Please input a positive integer.")
+                        except ValueError:
+                            print("Please input an integer.")
+                    break
+                else:
+                    print("\nPlease input a valid option:")
         elif Free_summer_giveaway_userInput == "GeForce RTX 5090":
-            order.append(Free_summer_giveaway_userInput)
+            order.append("GeForce RTX 5090")
             while True:
                 try:
-                    Free_summer_giveaway_amount = input("How many GeForce RTX 5090  do you want: ")
+                    Free_summer_giveaway_amount = input("How many GeForce RTX 5090 do you want: ")
                     if Free_summer_giveaway_amount == "reset":
                         print("\nYou have reset your order.")
                         Reset()
                     Free_summer_giveaway_amount = int(Free_summer_giveaway_amount)
                     if Free_summer_giveaway_amount > 0:
-                        total_price.append(1.50 * Free_summer_giveaway_amount)
+                        total_price.append(0.00 * Free_summer_giveaway_amount)
                         break
                     else:
                         print("Please input a positive integer.")
                 except ValueError:
                     print("Please input an integer.")
-                ##break
         elif Free_summer_giveaway_userInput == "Birthday card":
-            order.append(Free_summer_giveaway_userInput)
+            order.append("Birthday card")
             while True:
                 try:
                     Free_summer_giveaway_amount = input("How many Birthday cards do you want: ")
@@ -303,36 +278,25 @@ def Free_summer_giveaway():
                         Reset()
                     Free_summer_giveaway_amount = int(Free_summer_giveaway_amount)
                     if Free_summer_giveaway_amount > 0:
-                        total_price.append(2.00 * Free_summer_giveaway_amount)
+                        total_price.append(0.00 * Free_summer_giveaway_amount)
                         break
                     else:
                         print("Please input a positive integer.")
                 except ValueError:
                     print("Please input an integer.")
     elif Free_summer_giveaway_option == "no":
-        order_Options.append(Free_summer_giveaway_option)
+        order_Options.append("no")
         order.append("no options")
         Free_summer_giveaway_amount = ""
-        print("")
+        print()
     else:
-        print("")
-        print("That is not an option")
+        print("\nThat is not an option")
         Free_summer_giveaway()
 
 
-
-            
 iceCream()
 Toppings()
 Free_summer_giveaway()
 
-
-    
-print("")
-print("")
-
-
-print("Your total is: " + "{:.2f}".format(sum(total_price))) ### Found on cheatography.com for f strings
-
-
-print("You have ordered: " + str(iceCream_amount) + " " + order[0] + " ice cream scoops, " +  str(Toppings_amount) + " " + order[1] + " servings" + ", and " + str(Free_summer_giveaway_amount) + " " + order[2] + " out of the free gifts")
+print("\n\nYour total is: " + "{:.2f}".format(sum(total_price)))
+print("You have ordered: " + str(iceCream_amount) + " " + order[0] + " ice cream scoops, " + str(Toppings_amount) + " " + order[1] + " servings, and " + str(Free_summer_giveaway_amount) + " " + order[2] + " out of the free gifts")
