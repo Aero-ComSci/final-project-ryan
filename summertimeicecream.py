@@ -176,7 +176,7 @@ def Toppings():
             order.append(Toppings_userInput)
             while True:
                 try:
-                    Toppings_amount = input("How many birthday cards do you want: ")
+                    Toppings_amount = input("How many servings of bolts do you want: ")
                     if Toppings_amount == "reset":
                         print("\nYou have reset your order.")
                         Reset()
@@ -336,7 +336,3 @@ print("Your total is: " + "{:.2f}".format(sum(total_price))) ### Found on cheato
 
 
 print("You have ordered: " + str(iceCream_amount) + " " + order[0] + " ice cream scoops, " +  str(Toppings_amount) + " " + order[1] + " servings" + ", and " + str(Free_summer_giveaway_amount) + " " + order[2] + " out of the free gifts")
-
-
-
-
